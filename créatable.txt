@@ -1,0 +1,46 @@
+CREATE TABLE Athlete
+{
+id INT PRIMARY KEY NOT NULL,
+id_pays INT FOREIGN KEY REFERENCES Pays(id),
+nom VARCHAR(100),
+genre VARCHAR(100),
+age INT,
+discipline VARCHAR FOREIGN KEY REFERENCES Epreuve(nom)
+}
+
+CREATE TABLE Pays
+{
+id INT PRIMARY KEY NOT NULL,
+nom VARCHAR(100)
+}
+
+CREATE TABLE Epreuve
+{
+id INT PRIMARY KEY NOT NULL,
+nom VARCHAR(100),
+solo_multi VARCHAR(100),
+date DATE FOREIGN KEY REFERENCES Date(date),
+heure TIME FOREIGN KEY REFERENCES Date(heure),
+categorie VARCHAR FOREIGN KEY REFERENCES Categorie_Sport(id)
+}
+
+CREATE TABLE Categorie_Sport
+{
+id INT PRIMARY KEY NOT NULL,
+Nbr_epreuve INT
+}
+
+CREATE TABLE Date
+{
+date DATE,
+heure TIME
+}
+
+CREATE TABLE Resultat
+{
+epreuve VARCHAR FOREIGN KEY REFERENCES Epreuve(nom),
+gagnant VARCHAR FOREIGN KEY REFERENCES Athlete(nom),
+medaille VARCHAR(100),
+score INT,
+temps TIME
+}
